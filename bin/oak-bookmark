@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+var config = require('../lib/config');
+var logger = require('../lib/logger')('oak-bookmark');
+var app = require('../lib/app');
+
+app.set('port', process.env.PORT || config.listen_port ||  3000);
+
+var server = app.listen(app.get('port'), function() {
+  logger.info('Oak-bookmark server listening on port ' + server.address().port);
+});
