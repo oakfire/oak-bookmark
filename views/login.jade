@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  #login-form.container
+    form.form-signin(role='form')
+      h2.form-signin-heading Please sign in
+      input.form-control(type='email', placeholder='Email address', required, autofocus)
+      input.form-control(type='password', placeholder='Password', required)
+      .checkbox
+        label
+          input(type='checkbox', value='remember-me') 
+          label Remember me
+      button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
+  include ./footer.jade
