@@ -14,8 +14,12 @@
         li#nav-about
           a(href='/about') About
       ul.nav.navbar-nav.navbar-right
-        li#nav-login
-          if !login
+        if !login
+          li#nav-login
             a(href='/login') Sign in
-          else 
+        else
+          li#nav-account
+            a(href='#')=user.account
+          li#nav-logout
             a(href='/logout') Sign out
+

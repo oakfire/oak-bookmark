@@ -5,9 +5,13 @@ var config = require('../lib/config');
 /* GET home page. */
 
 function _doNormal(req, res) {
-    var data = { title: config.site_name,
+    var data = { 
+        title: config.site_name,
         login: req.isAuthenticated()
     };
+    if(req.user) {
+        data.user = req.user;
+    }
     return data;
 }
 
