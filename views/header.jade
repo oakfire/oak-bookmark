@@ -13,13 +13,13 @@
           a(href='/') Home
         li#nav-about
           a(href='/about') About
-      ul.nav.navbar-nav.navbar-right
-        if !login
-          li#nav-login
-            a(href='/login') Sign in
-        else
-          li#nav-account
-            a(href='#')=user.account
-          li#nav-logout
-            a(href='/logout') Sign out
+      if !login
+        a.btn.btn-primary.navbar-btn.navbar-right(href='/login') Sign in
+      else
+        a.btn.btn-warning.navbar-btn.navbar-right(href='/logout') Sign out
+      if login
+        p.navbar-text.navbar-right   
+        p.navbar-text.navbar-right Signed in as 
+          a.navbar-link(href='#')=user.account
+    
 
