@@ -3,6 +3,7 @@ var router = express.Router();
 var config = require('../lib/config');
 var passport = require('../lib/obm-pass');
 var logger = require('../lib/logger')('oak-bookmark');
+var bodyParser = require('body-parser');
 
 router.get('/', function(req, res) {
     if(req.isAuthenticated()) {
@@ -22,15 +23,21 @@ router.get('/', function(req, res) {
         logger.debug(req.session);
         data.message = req.session.messages.shift();
         data.last_tried_name = req.session.last_tried_name ? req.session.last_tried_name : null;
-        data.last_rememberme = !!req.session.last_rememberme;
+        data.last_rememberme = !!req.session.rememberme;
     }
     res.render('login', data);
 });
 
-router.post('/', function(req, res, next) {
+var urleParser = bodyParser.urlencoded({ extended: false });
+
+router.post('/', urleParser, function(req, res, next) {
+    if (!req.body) return res.sendStatus(400);
     logger.info(req.body);
     req.session.last_tried_name = req.body.username ? req.body.username : null;
-    req.session.last_rememberme = req.body.rememberme ? true : false;
+    req.session.rememberme = req.body.rememberme ? true : false;
+    if(!req.session.rememberme){
+        req.session.cookie.expires = false; //虽然客户端cookie存活时间为浏览器关闭, 但是 connect-mongo 会在数据库里存留失效session 两周.
+    }
     next();
 });
 
