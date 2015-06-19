@@ -13,13 +13,8 @@
           a(href='/') Home
         li#nav-about
           a(href='/about') About
-      if !login
-        a.btn.btn-primary.navbar-btn.navbar-right(href='/login') Sign in
-      else
-        a.btn.btn-warning.navbar-btn.navbar-right(href='/logout') Sign out
+        a.btn.btn-primary.navbar-btn.navbar-right(href=login ? '/logout' : '/login')=login ? 'Sign out' : 'Sign in'
       if login
-        p.navbar-text.navbar-right   
         p.navbar-text.navbar-right Signed in as 
           a.navbar-link(href='#')=user.account
-    
 
