@@ -2,10 +2,19 @@ extends layout
 
 block content
   .container
-    .list-group
-      - for(var i = 0; i<bookmarks.length; ++i)
-        a.list-group-item(href=bookmarks[i].url)
-          h4.list-group-item-heading=bookmarks[i].title
-          p.list-group-item-text=bookmarks[i].url
-          - if(bookmarks[i].desc && bookmarks[i].desc != '')
-            p.list-group-item-text=bookmarks[i].desc
+    .col-xs-8
+      .panel-heading
+        h3.panel-title bookmarks
+      .panel-body
+        .list-group
+          - for(var i = 0; i<bookmarks.length; ++i)
+            a.list-group-item(href=bookmarks[i].url)
+              h4.list-group-item-heading=bookmarks[i].title
+              p.list-group-item-text=bookmarks[i].url
+              - if(bookmarks[i].desc && bookmarks[i].desc != '')
+                p.list-group-item-text=bookmarks[i].desc
+    .col-xs-4
+      .panel-heading
+        h3.panel-title labels
+      .panel-body
+        |todo
